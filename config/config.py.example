@@ -1,0 +1,41 @@
+# Sumber: https://docs.pydantic.dev/latest/concepts/pydantic_settings/
+
+from pydantic import BaseModel
+from pydantic_settings import BaseSettings, SettingsConfigDict
+
+class JWTConfig(BaseModel):
+    secret_key: str = "change-this"
+    fernet_key: str = "change-this"
+    salt: str = "change-this"
+
+class MongoConfig(BaseModel):
+    host: str = "localhost"
+    port: int = 27017
+    username: str = "change-this"
+    password: str = "change-this"
+    db: str = "change-this"
+    authSource: str = ""
+    connect: bool = False
+    authMechanism: str = "SCRAM-SHA-256"
+    tls: bool = False
+    tlsCAFile: str = ""
+    tlsCertificateKeyFile: str = ""
+    tlsDisableOCSPEndpointCheck: bool = True
+
+class Settings(BaseSettings):
+    model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', env_nested_delimiter="__")
+
+    # General
+    app_name: str
+    app_env: str
+    app_host: str
+    app_port: int
+    app_debug: bool
+    
+    # Mongodb
+    mongo: MongoConfig = MongoConfig()
+
+    # JWT
+    jwt: JWTConfig = JWTConfig()
+
+settings = Settings()

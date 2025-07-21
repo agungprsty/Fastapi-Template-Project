@@ -1,0 +1,25 @@
+services:
+  mongodb:
+    container_name: fastapi-mongo
+    image: mongo
+    ports:
+      - "27017:27017"
+    environment:
+      MONGO_INITDB_ROOT_USERNAME: admin
+      MONGO_INITDB_ROOT_PASSWORD: admin
+    network_mode: 'host'
+    volumes:
+      - ./docker/mongo/mongo-init.js:/docker-entrypoint-initdb.d/mongo-init.js:ro
+
+  redis:
+    container_name: fastapi-redis
+    image: redis:alpine
+    command: >
+          --requirepass admin
+    volumes:
+      - './docker/redis:/data'
+    ports:
+      - 6380:6379
+    environment:
+      - TZ=Asia/Jakarta
+    network_mode: 'host'

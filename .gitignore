@@ -1,0 +1,70 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*$py.class
+
+# C extensions
+*.so
+
+# Distribution / packaging
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+pip-wheel-metadata/
+share/python-wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+MANIFEST
+
+# PyInstaller
+*.manifest
+*.spec
+
+
+# Unit test / coverage reports
+.pytest_cache/
+htmlcov/
+
+# Log
+log/*.log
+log/*.log.*
+
+# Flask stuff:
+instance/
+.webassets-cache
+
+# Environments
+.env
+.envrc
+.venv*
+venv*
+
+# IDE and editor
+.vscode/
+.idea/
+
+# Bundled assets
+public/js/*.js
+public/css/*.css
+node_modules
+
+# docker
+.docker
+docker/
+.coverage
+coverage.xml
+
+# configuration
+config/*.py
+db/seeder/config.ini
