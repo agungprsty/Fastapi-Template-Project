@@ -1,4 +1,4 @@
-# 🚀 FastAPI Clean Architecture with Beanie ODM
+# 🚀 FastAPI Clean Architecture with MongoDB
 
 A scalable and production-ready Python backend using **FastAPI**, **Beanie** (MongoDB ODM), and **Domain-Driven Design (DDD)** principles.
 
