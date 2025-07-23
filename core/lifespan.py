@@ -1,3 +1,5 @@
+# Source: https://medium.com/@life-is-short-so-enjoy-it/fastapi-experiment-lifespan-feature-7f87de5601db
+
 from fastapi import FastAPI
 from beanie import init_beanie
 from pymongo import MongoClient
@@ -6,7 +8,6 @@ from motor.motor_asyncio import AsyncIOMotorClient
 from apscheduler.schedulers.asyncio import AsyncIOScheduler
 from apscheduler.executors.asyncio import AsyncIOExecutor
 from apscheduler.jobstores.mongodb import MongoDBJobStore
-
 from core.di import CoreContainer
 from config.config import Settings
 from src.utils.documents_loader import collect_documents

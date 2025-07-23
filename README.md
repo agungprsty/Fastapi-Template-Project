@@ -37,6 +37,9 @@ A scalable and production-ready Python backend using **FastAPI**, **Beanie** (Mo
 - **`routes/`**: API route definitions and controller logic.
 - **`utils/`**: Utility functions such as document loaders, parsers, etc.
 
+### log/
+- Contains integration logs for the application.
+
 ### tests/
 - Contains unit and integration tests for the application.
 

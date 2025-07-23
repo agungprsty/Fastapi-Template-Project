@@ -1,3 +1,5 @@
+# Source: https://betterstack.com/community/guides/scaling-python/error-handling-fastapi/
+
 from fastapi import Request
 from fastapi.responses import JSONResponse
 from fastapi.exceptions import RequestValidationError
@@ -6,7 +8,6 @@ from starlette.status import HTTP_422_UNPROCESSABLE_ENTITY, HTTP_500_INTERNAL_SE
 from src.exception.http_error import HttpException
 
 def http_exception_handler(request: Request, exc: HttpException):
-    print(exc)
     return JSONResponse(
         status_code=exc.http_response_status,
         content={

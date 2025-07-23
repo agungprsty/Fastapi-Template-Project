@@ -4,6 +4,7 @@ from core.routes import root_router, api_router
 from core.lifespan import LifespanFactory
 from core.di import CoreContainer
 from core.error import register_exception_handlers
+from core.logger import configure_logging
 
 
 def make_app() -> FastAPI:
@@ -12,6 +13,7 @@ def make_app() -> FastAPI:
 
     lifespan = LifespanFactory()
 
+    # FastAPI app setup
     app = FastAPI(
         title=settings.app_name,
         docs_url="/docs",
@@ -20,8 +22,13 @@ def make_app() -> FastAPI:
         lifespan=lifespan
     )
 
+    # Logging setup
+    configure_logging(app)
+
+    # Exception handlers
     register_exception_handlers(app)
     
+    # Router
     app.include_router(root_router)
     app.include_router(api_router)
 
