@@ -14,6 +14,9 @@ A scalable and production-ready Python backend using **FastAPI**, **Beanie** (Mo
 - 📅 Background Jobs — Ready for APScheduler with MongoDB JobStore.
 - 📑 Structured Error Handling — Custom exception classes with unified response format.
 - 🧪 Pytest — Testable components and service layer.
+- 📜 Centralized Logging — JSON-structured logging for HTTP request/response with sensitive field masking (`password`, etc).
+- 🧩 Redis Integration (Async) — `redis.asyncio` client encapsulated in `adapter/redis/connection.py` with clean DI for scalable async usage.
+- 🔐 Custom Middleware — Organized middleware layer
 
 ---
 
@@ -35,6 +38,7 @@ A scalable and production-ready Python backend using **FastAPI**, **Beanie** (Mo
 - **`domain/`**: Domain models representing core business logic and entities.
 - **`exception/`**: Custom exception classes for specific errors in the application.
 - **`infrastructure/`**: Repositories and external adapters for databases, APIs, etc.
+- **`middleware/`**: Custom middleware layer
 - **`routes/`**: API route definitions and controller logic.
 - **`utils/`**: Utility functions such as document loaders, parsers, etc.
 
