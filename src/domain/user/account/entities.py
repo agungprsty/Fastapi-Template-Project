@@ -1,3 +1,4 @@
+import bcrypt
 from .enum import AccountStatus, AuthenticationRole as Role
 from pydantic import BaseModel
 
@@ -19,6 +20,11 @@ class Account(BaseModel):
             "email": self.email
         }
 
+    def validate_password(self, passwd_str: str) -> bool:
+        return bcrypt.checkpw(
+            passwd_str.encode('utf-8'),
+            self.password_hash.encode('utf-8')
+        )
 
 class AccountResposne(BaseModel):
     id: str
@@ -30,3 +36,6 @@ class AccountResposne(BaseModel):
     created_at: int
     updated_at: int
     deleted_at: int
+
+class AccessTokenResponse(BaseModel):
+    access_token: str
