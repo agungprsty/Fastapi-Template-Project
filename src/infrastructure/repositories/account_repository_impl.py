@@ -1,7 +1,8 @@
 from abc import abstractmethod
 from typing import Protocol, Optional, List
 from src.domain.user.account.entities import Account
-from src.domain.user.account.input_account import InputCreateAccount, InputUpdateAccount
+from src.domain.user.account.input_account import InputCreateAccount, InputUpdateAccount, InputUpdateLocalozation
+from src.domain.user.authentication.authentication import AccountAuthentication
 
 class AccountRepositoryImpl(Protocol):
     @abstractmethod
@@ -21,5 +22,13 @@ class AccountRepositoryImpl(Protocol):
         ...
 
     @abstractmethod
-    async def update(self, id: str, input_update: InputUpdateAccount) -> Account | None:
+    async def update(self, auth: AccountAuthentication, input_update: InputUpdateAccount) -> Account | None:
+        ...
+
+    @abstractmethod
+    async def delete(self, authentication: AccountAuthentication, id: str) -> None:
+        ...
+
+    @abstractmethod
+    async def update_localization(self, authentication: AccountAuthentication, data: InputUpdateLocalozation) -> Account:
         ...
