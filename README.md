@@ -30,6 +30,7 @@ A scalable and production-ready Python backend using **FastAPI**, **Beanie** (Mo
 - **`config.py`**: Application settings and environment configuration, often using `.env` files and `pydantic` for validation.
 
 ### src/
+- **`adapter/`**: Contains external/3party configuration.
 - **`application/`**: Contains use cases and application logic.
 - **`domain/`**: Domain models representing core business logic and entities.
 - **`exception/`**: Custom exception classes for specific errors in the application.

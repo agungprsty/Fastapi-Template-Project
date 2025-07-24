@@ -11,6 +11,7 @@ from apscheduler.jobstores.mongodb import MongoDBJobStore
 from core.di import CoreContainer
 from config.config import Settings
 from src.utils.documents_loader import collect_documents
+from src.adapter.cache.connection import RedisConnection
 
 
 class LifespanFactory:
@@ -39,14 +40,21 @@ class LifespanFactory:
         # Load all Beanie documents
         document_models = collect_documents(self.document_package)
 
-        # Init Beanie
+        # Init Mongodb Beanie
         await init_beanie(
             database=client[settings.mongo.db],
             document_models=document_models
         )
 
         app.state.mongo_client = client
-        print("[MongoDB] Beanie Connected and initialized")
+        print("[MongoDB] initialized and Connected")
+
+        # Init Redis client
+        redis = RedisConnection(settings.redis).connect()
+        await redis.ping()  # optional test connection
+
+        app.state.redis = redis
+        print("[Redis] initialized and Connected")
 
         # Init APScheduler with MongoDBJobStore
         sync_client = MongoClient(
@@ -76,7 +84,7 @@ class LifespanFactory:
         )
         scheduler.start()
         app.state.scheduler = scheduler
-        print("[Scheduler] APScheduler started")
+        print("[Scheduler] initialized and started")
 
         yield  # Run FastAPI app
 
@@ -84,5 +92,7 @@ class LifespanFactory:
         scheduler.shutdown()
         client.close()
         sync_client.close()
-        print("[Scheduler] Stopped")
+        redis.close()
         print("[MongoDB] Closed")
+        print("[Redis] Stopped")
+        print("[Scheduler] Stopped")

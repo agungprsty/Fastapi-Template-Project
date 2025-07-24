@@ -19,7 +19,7 @@ def read_item(item_id: int, q: Union[str, None] = None):
     return {"item_id": item_id, "q": q}
 
 @api_router.post("/interval")
-async def schedule_reminder(request: Request, message: str):
+async def apscheduler_demo(request: Request, message: str):
     scheduler = request.app.state.scheduler
     scheduler.add_job(
         send_reminder,
@@ -30,6 +30,13 @@ async def schedule_reminder(request: Request, message: str):
         replace_existing=True
     )
     return {"status": "scheduled 1 minutes"}
+
+@api_router.get("/cache")
+async def cache_demo(request: Request, message: str):
+    redis = request.app.state.redis
+    await redis.set("example", message, ex=120)
+    val = await redis.get("example")
+    return {"value": val, "expire": 120}
 
 api_routers: tuple[APIRouter, ...] = (
     user_routes,

@@ -22,6 +22,12 @@ class MongoConfig(BaseModel):
     tlsCertificateKeyFile: str = ""
     tlsDisableOCSPEndpointCheck: bool = True
 
+class RedisConfig(BaseModel):
+    host: str = "localhost"
+    port: int = 6379
+    db: int = 0
+    password: str = "change-this"
+
 class Settings(BaseSettings):
     model_config = SettingsConfigDict(env_file='.env', env_file_encoding='utf-8', env_nested_delimiter="__")
 
@@ -37,5 +43,8 @@ class Settings(BaseSettings):
 
     # JWT
     jwt: JWTConfig = JWTConfig()
+
+    # Redis
+    redis: RedisConfig = RedisConfig()
 
 settings = Settings()
