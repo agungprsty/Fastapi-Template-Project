@@ -3,7 +3,7 @@ from src.infrastructure.repositories.account_repository_impl import AccountRepos
 from src.domain.user.account.input_account import InputLoginByEmail
 from src.domain.user.account.entities import Account
 from src.exception.http_error import BadRequestException
-from src.utils.jwt import Token
+from src.adapter.token.token import Token
 from src.domain.user.account.entities import AccessTokenResponse
 
 class LoginByEmail(object):

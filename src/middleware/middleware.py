@@ -6,7 +6,7 @@ from src.domain.user.authentication.authentication import AccountAuthentication,
 from src.application.user.containers import UserContainer
 from src.domain.user.account.entities import Account
 
-async def jwt_auth(
+async def auth(
     request: Request, 
 ):
     config: Settings = request.app.container.config()
@@ -24,6 +24,11 @@ async def jwt_auth(
             raise BadRequestException("Invalid token")
 
         request.state.authentication = AccountAuthentication(
+            id=user.id,
+            role=AuthenticationRole[user.role.name]
+        )
+
+        return AccountAuthentication(
             id=user.id,
             role=AuthenticationRole[user.role.name]
         )

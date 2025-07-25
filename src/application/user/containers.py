@@ -9,13 +9,15 @@ from src.application.user.query import get_by_id, \
     get_me
 
 from src.application.user.command import login_by_email, \
-    update_email
+    update_email, \
+    delete, \
+    update_localization
 
 class UserContainer(containers.DeclarativeContainer):
     wiring_config = containers.WiringConfiguration(
         modules=[
             "src.routes.user",
-            "src.utils.middleware"]
+        ]
     )
 
     token = providers.Dependency()
@@ -54,5 +56,15 @@ class UserContainer(containers.DeclarativeContainer):
 
     command_update_email_account = providers.Factory(
         update_email.UpdateEmail,
+        account_repository=account_repository
+    )
+
+    command_delete = providers.Factory(
+        delete.Delete,
+        account_repository=account_repository
+    )
+
+    command_update_localization = providers.Factory(
+        update_localization.UpdateLocalization,
         account_repository=account_repository
     )
